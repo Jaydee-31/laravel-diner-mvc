@@ -2,14 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingsController;
+use App\Http\Controllers\AdminController;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', function () {
-    return view('bookings.create');
-});
-
-Route::resource('bookings', BookingsController::class);
+Route::resource('home', BookingsController::class);
+Route::resource('bookings', AdminController::class);

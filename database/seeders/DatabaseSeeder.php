@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         //Seed the application's bookings table with random data .
         $faker = Faker::create();
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             DB::table('bookings')->insert([
                 'name' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
