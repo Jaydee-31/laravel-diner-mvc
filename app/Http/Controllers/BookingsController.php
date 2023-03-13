@@ -15,7 +15,8 @@ class BookingsController extends Controller
      */
     public function index()
     {
-        //
+      
+        return view('home.create');
     }
 
     /**
@@ -25,7 +26,7 @@ class BookingsController extends Controller
      */
     public function create()
     {
-        return view('bookings.create');
+        return view('home.create');
     }
 
     /**
@@ -50,7 +51,7 @@ class BookingsController extends Controller
 
         Booking::create($request->all());
      
-        return redirect()->route('bookings.create')
+        return redirect()->route('home.create')
                         ->with('success','Booked successfully.')->setTargetUrl(url()->previous() . '#book-a-table');
 
     }

@@ -1,70 +1,97 @@
-@extends('bookings.index')
+@extends('bookings.layout')
 @section('content')
 
-<!-- ======= Book A Table Section ======= -->
-<section id="book-a-table" class="book-a-table">
-      <div class="container">
+   <div class="container">
 
-        <div class="section-title">
-          <h2>Book a <span>Table</span></h2>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+ 
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-lg-12 margin-tb">
+                            <div class="pull-left">
+                                <h2>Add New Booking</h2>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        {{-- @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                        @endif --}}
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form action="{{ route('bookings.store') }}" method="POST">
+                            @csrf
+
+                            <div class="form-group row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Name:</strong>
+                                        <input type="text" name="name" class="form-control" placeholder="name" value="{{ old('name') }}" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Email:</strong>
+                                        <input type="email" name="email" class="form-control" placeholder="email" value="{{ old('email') }}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Phone:</strong>
+                                        <input type="text" name="phone" class="form-control" placeholder="phone" value="{{ old('phone') }}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Date:</strong>
+                                        <input type="date" name="date" class="form-control" placeholder="date" value="{{ old('date') }}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Time:</strong>
+                                        <input type="time" name="time" class="form-control" placeholder="time" value="{{ old('time') }}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>People:</strong>
+                                        <input type="number" name="people" class="form-control" placeholder="number of people" value="{{ old('people') }}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Message:</strong>
+                                        <input type="text" name="message" class="form-control" placeholder="message" value="{{ old('message') }}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                    <a href="{{ route('bookings.index') }}" class="btn btn-secondary">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <form action="{{ route('bookings.store') }}" method="POST" role="form" class="php-booking-form">
-			<div class="mb-2">
-				{{-- <div class="loading">Loading</div> --}}
-				@if ($message = Session::get('success'))
-				<div class="alert alert-success">
-					<p>{{ $message }}</p>
-					</div>
-				@endif
-				@if ($errors->any())
-				<div class="alert alert-danger">
-					<strong>Whoops!</strong> There were some problems with your input.<br><br>
-					<ul>
-					@foreach ($errors->all() as $error)
-						<li>{{ $error }}</li>
-					@endforeach
-					</ul>
-				</div>
-				@endif
-			</div>
-
-			@csrf
-		<div class="row">
-            <div class="col-lg-4 col-md-6 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-             
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-              
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-              <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-             
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3">
-              <input type="date" name="date" class="form-control" id="date" placeholder="Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-            
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3">
-              <input type="time" class="form-control" name="time" id="time" placeholder="Time" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-            
-            </div>
-            <div class="col-lg-4 col-md-6 form-group mt-3">
-              <input type="number" class="form-control" name="people" id="people" placeholder="# of people" data-rule="minlen:1" data-msg="Please enter at least 1 chars">
-              
-            </div>
-          </div>
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
-          
-          </div><br>
-          
-          <div class="text-center"><button type="submit">Book</button></div>
-        </form>
-
-      </div>
-    </section><!-- End Book A Table Section -->
 @endsection
